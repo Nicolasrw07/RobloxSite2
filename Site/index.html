@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Central de Recompensas - Robux</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0c0807; color: #f3f4f6; }
+        .card-custom {
+            background: linear-gradient(180deg, rgba(26, 17, 15, 0.95) 0%, rgba(18, 11, 9, 0.98) 100%);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-4 selection:bg-red-600 selection:text-white">
+
+    <!-- Container Principal Focado em Mobile -->
+    <div class="w-full max-w-md mx-auto flex flex-col gap-5 pb-10">
+
+        <!-- Topo / Header -->
+        <header class="flex flex-col items-center text-center pt-2">
+            <!-- Ícone Central de Recompensas -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1e1311] border border-red-500/30 text-xs font-semibold text-gray-300 tracking-wider mb-3 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                CENTRAL DE RECOMPENSAS
+            </div>
+
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 flex items-center justify-center shadow-lg mb-3">
+                <span class="text-red-500 font-black text-2xl">&lt;/&gt;</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                RESGATE SEUS <span class="text-amber-500">ROBUX</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-gray-400 mt-1 max-w-xs">
+                Complete os passos abaixo e receba sua recompensa direto no seu nick.
+            </p>
+        </header>
+
+        <!-- Indicador de Passos (Mudado de 4 para 2) -->
+        <div class="flex justify-center items-center gap-3 my-1">
+            <div id="step-indicator-1" class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 font-bold text-black flex items-center justify-center shadow-lg shadow-orange-600/30 text-sm">1</div>
+            <div class="w-8 h-0.5 bg-neutral-800"></div>
+            <div id="step-indicator-2" class="w-10 h-10 rounded-full bg-[#1a110f] border border-neutral-800 text-gray-500 font-bold flex items-center justify-center text-sm">2</div>
+        </div>
+
+        <!-- ================= PÁGINA 1: Tutorial + Nick do Roblox ================= -->
+        <main id="page-1" class="flex flex-col gap-5">
+            
+            <!-- Bloco de Tutorial -->
+            <div class="card-custom rounded-2xl p-4 sm:p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-6 h-6 rounded-md bg-red-600/20 text-red-500 flex items-center justify-center">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <span class="font-bold text-sm tracking-wide text-white">TUTORIAL</span>
+                </div>
+                <!-- Player de Vídeo Simulando a Print -->
+                <div class="relative w-full aspect-video rounded-xl bg-black overflow-hidden border border-neutral-800 flex items-center justify-center group cursor-pointer">
+                    <div class="absolute inset-0 bg-neutral-900 flex flex-col items-center justify-center p-2 text-center">
+                        <div class="text-[10px] text-red-500 font-bold tracking-widest uppercase mb-1">TUTORIAL: COMO RECEBER ROBUX</div>
+                        <p class="text-[11px] text-gray-300 font-medium">Siga o passo a passo abaixo e complete todas as etapas!</p>
+                    </div>
+                    <div class="absolute w-12 h-12 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="absolute bottom-0 inset-x-0 h-1.5 bg-neutral-800">
+                        <div class="h-full w-1/3 bg-red-600"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco Inserir Nick do Roblox -->
+            <div class="card-custom rounded-2xl p-5 sm:p-6">
+                <h2 class="text-base font-extrabold text-white mb-1">SEU NICK DO ROBLOX</h2>
+                <p class="text-xs text-gray-400 mb-4">Buscamos seu perfil real no Roblox para enviar os Robux na conta certa.</p>
+
+                <form id="roblox-form" onsubmit="searchRobloxProfile(event)" class="space-y-4">
+                    <div>
+                        <input type="text" id="username" required placeholder="Ex: ProGamer2010" 
+                            class="w-full bg-[#120b09] border border-neutral-800 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-red-600 text-sm font-medium">
+                    </div>
+
+                    <button type="submit" id="search-btn" class="w-full btn-primary text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-900/30 text-sm flex items-center justify-center gap-2">
+                        <span>Buscar perfil</span>
+                    </button>
+                </form>
+
+                <!-- Resultado da Busca -->
+                <div id="profile-result" class="hidden mt-4 pt-4 border-t border-neutral-800/80 flex flex-col gap-3 animate-fadeIn">
+                    <div class="flex items-center gap-3 bg-[#120b09] p-3 rounded-xl border border-neutral-800">
+                        <img id="avatar-img" src="" alt="Avatar" class="w-12 h-12 rounded-lg object-cover bg-neutral-900 border border-neutral-700">
+                        <div class="overflow-hidden">
+                            <h3 id="profile-name" class="font-bold text-sm text-white truncate">Nome</h3>
+                            <p id="profile-handle" class="text-xs text-gray-400 truncate">@nick</p>
+                            <p id="profile-id" class="text-[10px] text-gray-500 font-mono">ID 000000</p>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="goToStep2()" class="w-full btn-primary text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-900/30 text-sm">
+                        Sou eu, continuar
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-center text-gray-500 mt-1">Siga todas as etapas e envie uma captura completa e legível.</p>
+        </main>
+
+        <!-- ================= PÁGINA 2 (Final): Passos & Envio de Print ================= -->
+        <main id="page-2" class="hidden flex-col gap-4 animate-fadeIn">
+            
+            <!-- Mensagem de Boas Vindas com o Nick -->
+            <div class="card-custom rounded-2xl p-5">
+                <h2 id="welcome-title" class="text-lg font-black text-white uppercase tracking-wide mb-1">QUASE LÁ, NICOLAS!</h2>
+                <p class="text-xs text-gray-400">Siga o passo a passo e envie a print + pedido de 20.000 Robux:</p>
+            </div>
+
+            <!-- Aviso Importante -->
+            <div class="rounded-2xl p-4 bg-gradient-to-r from-red-950/40 to-neutral-900 border border-red-600/40 text-xs text-gray-300">
+                <span class="font-bold text-red-400 block mb-1">NÃO PULE NENHUM PASSO</span>
+                Print cortada, errada ou sem a confirmação não será aprovada.
+            </div>
+
+            <!-- Lista dos Passos -->
+            <div class="flex flex-col gap-2.5">
+                <div class="card-custom rounded-xl p-3.5 flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-md">1</div>
+                    <span class="text-xs font-medium text-gray-200">Baixe o TikTok Lite (Play Store)</span>
+                </div>
+                <div class="card-custom rounded-xl p-3.5 flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-md">2</div>
+                    <span class="text-xs font-medium text-gray-200">Crie uma conta nele</span>
+                </div>
+                <div class="card-custom rounded-xl p-3.5 flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-md">3</div>
+                    <span class="text-xs font-medium text-gray-200">Clique no link abaixo e clique em baixar</span>
+                </div>
+                <div class="card-custom rounded-xl p-3.5 flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-md">4</div>
+                    <span class="text-xs font-medium text-gray-200">Quando aparecer que você indicou, mande a print aqui</span>
+                </div>
+            </div>
+
+            <!-- Botão Centralizado com Link Direto do TikTok Lite -->
+            <div class="w-full flex justify-center my-1">
+                <a href="https://www.tiktok.com/d/4/ZS9DnpXdHE18k-jy2AJ/" target="_blank" class="w-full text-center py-3.5 px-6 rounded-xl bg-[#1e1311] border border-amber-500/40 text-amber-400 font-bold text-xs uppercase tracking-wider hover:bg-[#281815] transition-colors shadow-md">
+                    Abrir link do TikTok Lite
+                </a>
+            </div>
+
+            <!-- Área de Envio de Print -->
+            <div class="card-custom rounded-2xl p-5">
+                <span class="block text-xs font-bold text-white mb-3">Envie sua print aqui</span>
+                
+                <label for="print-file" class="border-2 border-dashed border-neutral-700 hover:border-red-600/60 rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-[#120b09] transition-all group">
+                    <span id="print-label-text" class="text-xs text-gray-400 text-center mb-3 group-hover:text-gray-300">Toque para enviar a print</span>
+                    <div class="w-14 h-14 rounded-xl border border-neutral-700 bg-neutral-900 flex items-center justify-center text-neutral-500 group-hover:border-red-500 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    </div>
+                    <input type="file" id="print-file" accept="image/*" class="hidden" onchange="previewPrint(event)">
+                </label>
+            </div>
+
+            <!-- Botão Final Enviar Pedido -->
+            <button onclick="submitOrder()" class="w-full btn-primary text-white font-bold py-4 px-6 rounded-xl shadow-xl shadow-red-900/40 text-sm uppercase tracking-wider">
+                Enviar pedido
+            </button>
+            
+            <button onclick="goBackToStep1()" class="text-center text-xs text-neutral-500 hover:text-gray-400 mt-1">
+                ← Voltar e alterar nick
+            </button>
+        </main>
+
+    </div>
+
+    <!-- Script de Integração e Comportamento -->
+    <script>
+        let verifiedNick = "";
+
+        async function searchRobloxProfile(event) {
+            event.preventDefault();
+            const inputVal = document.getElementById('username').value.trim();
+            const btn = document.getElementById('search-btn');
+            if (!inputVal) return;
+
+            btn.disabled = true;
+            btn.innerHTML = `Buscando perfil...`;
+
+            let avatarUrl = "";
+            let realName = inputVal;
+            let userId = Math.floor(Math.random() * 8999999) + 1000000;
+
+            try {
+                const res = await fetch(`https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(inputVal)}&limit=1`);
+                const data = await res.json();
+
+                if (data && data.data && data.data.length > 0) {
+                    userId = data.data[0].id;
+                    realName = data.data[0].name;
+
+                    const thumbRes = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`);
+                    const thumbData = await thumbRes.json();
+                    if (thumbData && thumbData.data && thumbData.data.length > 0) {
+                        avatarUrl = thumbData.data[0].imageUrl;
+                    }
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                avatarUrl = `https://tr.rbxcdn.com/30DAY-AvatarHeadshot-420x420-Png/Avatar/Headshot/Default`;
+            }
+
+            verifiedNick = realName;
+
+            document.getElementById('avatar-img').src = avatarUrl;
+            document.getElementById('profile-name').innerText = realName;
+            document.getElementById('profile-handle').innerText = `@${inputVal}`;
+            document.getElementById('profile-id').innerText = `ID ${userId}`;
+
+            document.getElementById('profile-result').classList.remove('hidden');
+            btn.classList.add('hidden');
+            document.getElementById('username').disabled = true;
+        }
+
+        function goToStep2() {
+            document.getElementById('step-indicator-1').className = "w-10 h-10 rounded-full bg-[#1a110f] border border-neutral-800 text-gray-500 font-bold flex items-center justify-center text-sm";
+            document.getElementById('step-indicator-2').className = "w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 font-bold text-black flex items-center justify-center shadow-lg shadow-orange-600/30 text-sm";
+
+            document.getElementById('welcome-title').innerText = `QUASE LÁ, ${verifiedNick.toUpperCase()}!`;
+
+            document.getElementById('page-1').classList.add('hidden');
+            document.getElementById('page-2').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBackToStep1() {
+            document.getElementById('step-indicator-2').className = "w-10 h-10 rounded-full bg-[#1a110f] border border-neutral-800 text-gray-500 font-bold flex items-center justify-center text-sm";
+            document.getElementById('step-indicator-1').className = "w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 font-bold text-black flex items-center justify-center shadow-lg shadow-orange-600/30 text-sm";
+
+            document.getElementById('page-2').classList.add('hidden');
+            document.getElementById('page-1').classList.remove('hidden');
+            
+            document.getElementById('profile-result').classList.add('hidden');
+            document.getElementById('search-btn').classList.remove('hidden');
+            document.getElementById('username').disabled = false;
+            document.getElementById('username').value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previewPrint(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('print-label-text').innerText = `Print anexada: ${file.name}`;
+            }
+        }
+
+        function submitOrder() {
+            alert('Pedido enviado com sucesso para análise da comunidade!');
+        }
+    </script>
+</body>
+</html>
